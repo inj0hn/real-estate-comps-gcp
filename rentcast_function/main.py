@@ -72,6 +72,10 @@ def rentcast_handler(request):
     if not api_key or not github_token:
         return {"error": "Missing required API keys"}, 500
 
+    max_radius = request_json.get("max_radius", DATA_STORE["max_radius"])
+    days_old = request_json.get("days_old", DATA_STORE["days_old"])
+    comp_count = request_json.get("max_comps_count", DATA_STORE["max_comps_count"])
+
     headers = make_rentcast_headers(api_key)
 
     # Step 1: Get subject property
@@ -87,9 +91,6 @@ def rentcast_handler(request):
     bedrooms = property_data.get("bedrooms")
     bathrooms = property_data.get("bathrooms")
     square_footage = property_data.get("squareFootage")
-    max_radius = DATA_STORE["max_radius"]
-    days_old = DATA_STORE["days_old"]
-    comp_count = DATA_STORE["max_comps_count"]
 
     # Step 3: Fetch comps/market data in parallel
     def get_market_stats():
