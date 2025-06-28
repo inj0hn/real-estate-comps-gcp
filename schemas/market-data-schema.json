@@ -1,0 +1,210 @@
+{
+  "type": "object",
+  "properties": {
+    "zipCodeId": {
+      "type": "string",
+      "description": "Unique identifier for the zip code."
+    },
+    "zipCode": {
+      "type": "string",
+      "description": "The zip code."
+    },
+    "city": {
+      "type": "string",
+      "description": "City associated with the zip code."
+    },
+    "state": {
+      "type": "string",
+      "description": "State associated with the zip code (2-letter abbreviation)."
+    },
+    "saleData": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the sale data was last updated (YYYY-MM-DD)."
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "description": "Overall sale statistics for all property types and bedrooms.",
+              "$ref": "#/definitions/marketStatistics"
+            },
+            "byPropertyType": {
+              "type": "object",
+              "patternProperties": {
+                "^[A-Z_]+$": {
+                  "type": "object",
+                  "description": "Sale statistics by property type (e.g., SINGLE_FAMILY, CONDO).",
+                  "$ref": "#/definitions/marketStatistics"
+                }
+              },
+              "description": "Sale statistics broken down by property type."
+            },
+            "byBedrooms": {
+              "type": "object",
+              "patternProperties": {
+                "^[0-9]+(?:\\.[0-9]+)?$": {
+                  "type": "object",
+                  "description": "Sale statistics by number of bedrooms.",
+                  "$ref": "#/definitions/marketStatistics"
+                }
+              },
+              "description": "Sale statistics broken down by number of bedrooms."
+            }
+          },
+          "description": "Sale market statistics."
+        },
+        "history": {
+          "type": "array",
+          "description": "Historical sale data, dating back to January 2024.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Month of the historical data (YYYY-MM)."
+              },
+              "statistics": {
+                "type": "object",
+                "description": "Historical market statistics for that month.",
+                "$ref": "#/definitions/marketStatistics"
+              }
+            }
+          }
+        }
+      },
+      "description": "Sale market data for the zip code."
+    },
+    "rentalData": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the rental data was last updated (YYYY-MM-DD)."
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "description": "Overall rental statistics for all property types and bedrooms.",
+              "$ref": "#/definitions/marketStatistics"
+            },
+            "byPropertyType": {
+              "type": "object",
+              "patternProperties": {
+                "^[A-Z_]+$": {
+                  "type": "object",
+                  "description": "Rental statistics by property type (e.g., SINGLE_FAMILY, CONDO).",
+                  "$ref": "#/definitions/marketStatistics"
+                }
+              },
+              "description": "Rental statistics broken down by property type."
+            },
+            "byBedrooms": {
+              "type": "object",
+              "patternProperties": {
+                "^[0-9]+(?:\\.[0-9]+)?$": {
+                  "type": "object",
+                  "description": "Rental statistics by number of bedrooms.",
+                  "$ref": "#/definitions/marketStatistics"
+                }
+              },
+              "description": "Rental statistics broken down by number of bedrooms."
+            }
+          },
+          "description": "Rental market statistics."
+        },
+        "history": {
+          "type": "array",
+          "description": "Historical rental data, dating back to April 2020.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Month of the historical data (YYYY-MM)."
+              },
+              "statistics": {
+                "type": "object",
+                "description": "Historical market statistics for that month.",
+                "$ref": "#/definitions/marketStatistics"
+              }
+            }
+          }
+        }
+      },
+      "description": "Rental market data for the zip code."
+    }
+  },
+  "definitions": {
+    "marketStatistics": {
+      "type": "object",
+      "properties": {
+        "averagePrice": {
+          "type": "number",
+          "format": "integer",
+          "description": "Average price."
+        },
+        "medianPrice": {
+          "type": "number",
+          "format": "integer",
+          "description": "Median price."
+        },
+        "minPrice": {
+          "type": "number",
+          "format": "integer",
+          "description": "Minimum price."
+        },
+        "maxPrice": {
+          "type": "number",
+          "format": "integer",
+          "description": "Maximum price."
+        },
+        "averagePricePerSqFt": {
+          "type": "number",
+          "format": "float",
+          "description": "Average price per square foot."
+        },
+        "medianPricePerSqFt": {
+          "type": "number",
+          "format": "float",
+          "description": "Median price per square foot."
+        },
+        "averageSqFt": {
+          "type": "number",
+          "format": "integer",
+          "description": "Average square footage."
+        },
+        "medianSqFt": {
+          "type": "number",
+          "format": "integer",
+          "description": "Median square footage."
+        },
+        "averageDaysOnMarket": {
+          "type": "number",
+          "format": "float",
+          "description": "Average days on market."
+        },
+        "medianDaysOnMarket": {
+          "type": "number",
+          "format": "float",
+          "description": "Median days on market."
+        },
+        "totalListings": {
+          "type": "number",
+          "format": "integer",
+          "description": "Total number of listings."
+        }
+      },
+      "description": "Common statistical fields for market data."
+    }
+  }
+}

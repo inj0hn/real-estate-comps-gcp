@@ -1,0 +1,263 @@
+{
+  "type": "object",
+  "properties": {
+    "propertyId": {
+      "type": "string",
+      "description": "Unique identifier for the property."
+    },
+    "formattedAddress": {
+      "type": "string",
+      "description": "Full formatted address of the property."
+    },
+    "addressLine1": {
+      "type": "string",
+      "description": "First line of the property's street address."
+    },
+    "addressLine2": {
+      "type": "string",
+      "description": "Second line of the property's street address, if applicable."
+    },
+    "city": {
+      "type": "string",
+      "description": "City of the property."
+    },
+    "state": {
+      "type": "string",
+      "description": "State of the property (2-letter abbreviation)."
+    },
+    "zipCode": {
+      "type": "string",
+      "description": "Zip code of the property."
+    },
+    "county": {
+      "type": "string",
+      "description": "County of the property."
+    },
+    "latitude": {
+      "type": "number",
+      "format": "float",
+      "description": "Latitude coordinate of the property."
+    },
+    "longitude": {
+      "type": "number",
+      "format": "float",
+      "description": "Longitude coordinate of the property."
+    },
+    "propertyType": {
+      "type": "string",
+      "description": "Type of property (e.g., 'SINGLE_FAMILY', 'CONDO', 'MULTI_FAMILY')."
+    },
+    "bedrooms": {
+      "type": "number",
+      "format": "float",
+      "description": "Number of bedrooms in the property."
+    },
+    "bathrooms": {
+      "type": "number",
+      "format": "float",
+      "description": "Number of bathrooms in the property."
+    },
+    "squareFootage": {
+      "type": "number",
+      "format": "integer",
+      "description": "Total finished square footage of the property."
+    },
+    "lotSize": {
+      "type": "number",
+      "format": "float",
+      "description": "Size of the property's lot in acres or square feet."
+    },
+    "yearBuilt": {
+      "type": "number",
+      "format": "integer",
+      "description": "Year the property was built."
+    },
+    "assessorId": {
+      "type": "string",
+      "description": "Assessor's parcel identification number (APN) for the property."
+    },
+    "legalDescription": {
+      "type": "string",
+      "description": "Legal description of the property."
+    },
+    "subdivision": {
+      "type": "string",
+      "description": "Subdivision where the property is located."
+    },
+    "zoningCode": {
+      "type": "string",
+      "description": "Zoning code for the property."
+    },
+    "lastSaleDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the last sale of the property (YYYY-MM-DD)."
+    },
+    "lastSalePrice": {
+      "type": "number",
+      "format": "integer",
+      "description": "Price of the last sale of the property."
+    },
+    "hoa": {
+      "type": "object",
+      "properties": {
+        "hasHoa": {
+          "type": "boolean",
+          "description": "Indicates if the property is part of a Homeowners Association (HOA)."
+        },
+        "hoaFee": {
+          "type": "number",
+          "format": "float",
+          "description": "Monthly or annual HOA fee."
+        }
+      },
+      "description": "HOA information for the property."
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "architectureType": {
+          "type": "string",
+          "description": "Architectural style of the property."
+        },
+        "coolingSystem": {
+          "type": "string",
+          "description": "Type of cooling system."
+        },
+        "heatingSystem": {
+          "type": "string",
+          "description": "Type of heating system."
+        },
+        "exteriorType": {
+          "type": "string",
+          "description": "Material of the property's exterior."
+        },
+        "fireplaceType": {
+          "type": "string",
+          "description": "Type of fireplace, if any."
+        },
+        "foundationType": {
+          "type": "string",
+          "description": "Type of foundation."
+        },
+        "garageType": {
+          "type": "string",
+          "description": "Type of garage (e.g., 'ATTACHED', 'DETACHED')."
+        },
+        "poolType": {
+          "type": "string",
+          "description": "Type of pool, if any."
+        },
+        "roofType": {
+          "type": "string",
+          "description": "Type of roof material."
+        },
+        "roomCount": {
+          "type": "number",
+          "format": "integer",
+          "description": "Total number of rooms."
+        },
+        "unitCount": {
+          "type": "number",
+          "format": "integer",
+          "description": "Total number of units (for multi-family properties)."
+        }
+      },
+      "description": "Various features and characteristics of the property."
+    },
+    "taxAssessment": {
+      "type": "object",
+      "properties": {
+        "assessmentYear": {
+          "type": "number",
+          "format": "integer",
+          "description": "Year of the last tax assessment."
+        },
+        "totalValue": {
+          "type": "number",
+          "format": "integer",
+          "description": "Total assessed value of the property."
+        },
+        "landValue": {
+          "type": "number",
+          "format": "integer",
+          "description": "Assessed value of the land."
+        },
+        "improvementsValue": {
+          "type": "number",
+          "format": "integer",
+          "description": "Assessed value of improvements (structures)."
+        },
+        "annualTaxAmount": {
+          "type": "number",
+          "format": "float",
+          "description": "Total annual property tax amount."
+        }
+      },
+      "description": "Property tax assessment details."
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the historical event (e.g., sale, listing)."
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Type of historical event (e.g., 'SALE', 'LISTING')."
+          },
+          "eventPrice": {
+            "type": "number",
+            "format": "integer",
+            "description": "Price associated with the event, if applicable."
+          },
+          "dataSource": {
+            "type": "string",
+            "description": "Source of the historical data."
+          }
+        }
+      },
+      "description": "Historical events related to the property, such as sales."
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "ownerName": {
+          "type": "string",
+          "description": "Name of the property owner."
+        },
+        "ownerEntityType": {
+          "type": "string",
+          "description": "Type of owner entity (e.g., 'INDIVIDUAL', 'CORPORATION')."
+        },
+        "mailingAddress": {
+          "type": "object",
+          "properties": {
+            "streetAddress": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            }
+          },
+          "description": "Mailing address of the property owner."
+        },
+        "ownerOccupied": {
+          "type": "boolean",
+          "description": "Indicates if the property is owner-occupied."
+        }
+      },
+      "description": "Details about the property owner."
+    }
+  }
+}

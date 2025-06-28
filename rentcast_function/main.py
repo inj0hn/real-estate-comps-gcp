@@ -1,8 +1,11 @@
-import functions_framework
-import requests
 import os
 import json
 import concurrent.futures
+
+import functions_framework
+import requests
+
+from google.cloud import bigquery
 
 # --- Config ---
 DATA_STORE = {
@@ -136,6 +139,17 @@ def rentcast_handler(request):
         "property_record": property_data,
         **results
     }
+
+    try:
+        bq_client = bigquery.Client()
+        table_id = "real-estate-comps-gcp.real_estate_data.raw_property_data"
+        row = {
+            "property_id": property_data["id"],
+            "full_json": json.dumps(final_data)
+        }
+        bq_client.insert_rows_json(table_id, [row])
+    except Exception as e:
+        print(f"[WARN] BigQuery insert failed: {e}")
 
     gist = save_to_github_gist(property_data, final_data, github_token)
 

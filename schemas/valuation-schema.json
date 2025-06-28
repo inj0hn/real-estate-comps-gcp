@@ -1,0 +1,250 @@
+{
+  "type": "object",
+  "properties": {
+    "propertyId": {
+      "type": "string",
+      "description": "Unique identifier for the property."
+    },
+    "latitude": {
+      "type": "number",
+      "format": "float",
+      "description": "Latitude coordinate of the property."
+    },
+    "longitude": {
+      "type": "number",
+      "format": "float",
+      "description": "Longitude coordinate of the property."
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "streetAddress": {
+          "type": "string",
+          "description": "Street address of the property."
+        },
+        "city": {
+          "type": "string",
+          "description": "City of the property."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the property (2-letter abbreviation)."
+        },
+        "zipCode": {
+          "type": "string",
+          "description": "Zip code of the property."
+        },
+        "county": {
+          "type": "string",
+          "description": "County of the property."
+        }
+      },
+      "description": "Details of the property's address."
+    },
+    "bedrooms": {
+      "type": "number",
+      "format": "float",
+      "description": "Number of bedrooms in the property."
+    },
+    "bathrooms": {
+      "type": "number",
+      "format": "float",
+      "description": "Number of bathrooms in the property."
+    },
+    "squareFootage": {
+      "type": "number",
+      "format": "integer",
+      "description": "Total finished square footage of the property."
+    },
+    "lotSize": {
+      "type": "number",
+      "format": "float",
+      "description": "Size of the property's lot in acres or square feet."
+    },
+    "propertyType": {
+      "type": "string",
+      "description": "Type of property (e.g., 'SINGLE_FAMILY', 'CONDO', 'MULTI_FAMILY')."
+    },
+    "yearBuilt": {
+      "type": "number",
+      "format": "integer",
+      "description": "Year the property was built."
+    },
+    "lastSaleDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the last sale of the property (YYYY-MM-DD)."
+    },
+    "lastSalePrice": {
+      "type": "number",
+      "format": "integer",
+      "description": "Price of the last sale of the property."
+    },
+    "valueEstimate": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "integer",
+          "description": "Estimated property value."
+        },
+        "priceRangeLow": {
+          "type": "number",
+          "format": "integer",
+          "description": "Lower bound of the estimated property value range."
+        },
+        "priceRangeHigh": {
+          "type": "number",
+          "format": "integer",
+          "description": "Upper bound of the estimated property value range."
+        }
+      },
+      "description": "Estimated property value details (from /avm/value endpoint)."
+    },
+    "rentEstimate": {
+      "type": "object",
+      "properties": {
+        "rent": {
+          "type": "number",
+          "format": "integer",
+          "description": "Estimated long-term rent."
+        },
+        "rentRangeLow": {
+          "type": "number",
+          "format": "integer",
+          "description": "Lower bound of the estimated long-term rent range."
+        },
+        "rentRangeHigh": {
+          "type": "number",
+          "format": "integer",
+          "description": "Upper bound of the estimated long-term rent range."
+        }
+      },
+      "description": "Estimated long-term rent details (from /avm/rent/long-term endpoint)."
+    },
+    "comparables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the comparable property."
+          },
+          "formattedAddress": {
+            "type": "string",
+            "description": "Full formatted address of the comparable property."
+          },
+          "addressLine1": {
+            "type": "string",
+            "description": "First line of the comparable property's street address."
+          },
+          "addressLine2": {
+            "type": ["string", "null"],
+            "description": "Second line of the comparable property's street address, if applicable."
+          },
+          "city": {
+            "type": "string",
+            "description": "City of the comparable property."
+          },
+          "state": {
+            "type": "string",
+            "description": "State of the comparable property (2-letter abbreviation)."
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "Zip code of the comparable property."
+          },
+          "county": {
+            "type": "string",
+            "description": "County of the comparable property."
+          },
+          "latitude": {
+            "type": "number",
+            "format": "float",
+            "description": "Latitude coordinate of the comparable property."
+          },
+          "longitude": {
+            "type": "number",
+            "format": "float",
+            "description": "Longitude coordinate of the comparable property."
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "Type of comparable property."
+          },
+          "bedrooms": {
+            "type": "number",
+            "format": "float",
+            "description": "Number of bedrooms in the comparable property."
+          },
+          "bathrooms": {
+            "type": "number",
+            "format": "float",
+            "description": "Number of bathrooms in the comparable property."
+          },
+          "squareFootage": {
+            "type": "number",
+            "format": "integer",
+            "description": "Total finished square footage of the comparable property."
+          },
+          "lotSize": {
+            "type": "number",
+            "format": "float",
+            "description": "Size of the comparable property's lot in acres or square feet."
+          },
+          "yearBuilt": {
+            "type": "number",
+            "format": "integer",
+            "description": "Year the comparable property was built."
+          },
+          "price": {
+            "type": "number",
+            "format": "integer",
+            "description": "Price of the comparable property."
+          },
+          "listingType": {
+            "type": "string",
+            "description": "Type of listing for the comparable property (e.g., 'Standard')."
+          },
+          "listedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the comparable property was listed (ISO 8601 format)."
+          },
+          "removedDate": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "Date when the comparable property was removed from listing, if applicable."
+          },
+          "lastSeenDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the comparable property listing was last seen."
+          },
+          "daysOnMarket": {
+            "type": "number",
+            "format": "integer",
+            "description": "Number of days the comparable property has been on the market."
+          },
+          "distance": {
+            "type": "number",
+            "format": "float",
+            "description": "Distance from the subject property to the comparable property."
+          },
+          "daysOld": {
+            "type": "number",
+            "format": "integer",
+            "description": "Number of days since the comparable listing was active or last updated."
+          },
+          "correlation": {
+            "type": "number",
+            "format": "float",
+            "description": "Correlation metric indicating similarity to the subject property."
+          }
+        }
+      },
+      "description": "List of comparable properties used in the valuation."
+    }
+  }
+}
