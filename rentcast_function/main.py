@@ -37,27 +37,35 @@ def safe_request(url, headers, params=None):
         print(f"[WARN] Failed request to {url}: {e}")
     return {}
 
-def save_to_github_gist(property_data, full_data, github_token):
-    gist_id = property_data["id"].replace(",", "")
-    description = property_data.get("legalDescription") or f"Property {gist_id}"
-    formatted = json.dumps(full_data, indent=2)
-
+def save_to_github_gist_parts(property_data, final_data, github_token):
+    property_id = property_data["id"]
+    gist_description = f"Property {property_id} Data Parts"
     headers = make_github_headers(github_token)
-    body = {
-        "files": {f"{gist_id}.json": {"content": formatted}},
-        "public": False,
-        "description": description
+
+    # Prepare files
+    files = {
+        "property_record.json": {"content": json.dumps(final_data["property_record"], indent=2)},
+        "market_statistics.json": {"content": json.dumps(final_data.get("market_statistics", {}), indent=2)},
+        "sales_comps.json": {"content": json.dumps(final_data.get("sales_comps", {}), indent=2)},
+        "rental_comps.json": {"content": json.dumps(final_data.get("rental_comps", {}), indent=2)}
     }
 
-    url = f"https://api.github.com/gists/{gist_id}"
-    resp = requests.get(url, headers=headers)
+    # Check existing gists
+    gist_id = None
+    existing = requests.get("https://api.github.com/gists", headers=headers)
+    if existing.ok:
+        for gist in existing.json():
+            if gist.get("description") == gist_description:
+                gist_id = gist["id"]
+                break
 
-    if resp.status_code == 200:
+    body = {"files": files, "public": False, "description": gist_description}
+
+    if gist_id:
+        url = f"https://api.github.com/gists/{gist_id}"
         resp = requests.patch(url, headers=headers, json=body)
-    elif resp.status_code == 404:
-        resp = requests.post("https://api.github.com/gists", headers=headers, json=body)
     else:
-        resp.raise_for_status()
+        resp = requests.post("https://api.github.com/gists", headers=headers, json=body)
 
     resp.raise_for_status()
     return resp.json()
@@ -152,11 +160,13 @@ def rentcast_handler(request):
     except Exception as e:
         print(f"[WARN] BigQuery insert failed: {e}")
 
-    gist = save_to_github_gist(property_data, final_data, github_token)
+    gist = save_to_github_gist_parts(property_data, final_data, github_token)
 
     return {
         "message": "✓ Data saved to Gist",
         "gist_url": gist["html_url"],
+        "gist_description": gist["description"],
+        "gist_clone_url": gist["git_pull_url"],
         "property_id": property_data["id"],
         "address": address
     }
