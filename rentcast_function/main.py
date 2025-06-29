@@ -141,6 +141,7 @@ def rentcast_handler(request):
     }
 
     try:
+        print(f"Saving data to BigQuery. Id: {property['id']}")
         bq_client = bigquery.Client()
         table_id = "real-estate-comps-gcp.real_estate_data.raw_property_data"
         row = {
