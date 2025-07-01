@@ -9,8 +9,8 @@ from google.cloud import bigquery
 
 # --- Config ---
 DATA_STORE = {
-    "max_radius": 0.5,
-    "days_old": 180,
+    "max_radius": 10,
+    "days_old": 360,
     "max_comps_count": 15
 }
 
